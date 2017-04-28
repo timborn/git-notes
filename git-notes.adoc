@@ -1,1 +1,26 @@
 = Git & GitFlow Notes
+
+== Introduction
+Git provides _many_ choices.  
+This is an attempt to reduce git and gitflow to a small enough, usable subset.  The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
+
+== Use Cases
+
+sheep!
+bah! bah!
+rats!!
+
+image::images/gitflow-use-cases.png[git/gitflow Use Cases]
+
+== Standard Branching Model in GitFlow
+
+TODO insert standard branching model here
+
+== XXXX
+
+include::feature-branch/feature-branch.adoc[]
+
+== XXXX
+
+include::sections/about-version-control.asc[]
+

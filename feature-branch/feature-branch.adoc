@@ -1,0 +1,14 @@
+== Feature Branches
+
+=== Create Feature Branch
+Scenario: create a feature branch
+Roles: developer 
+Goal: create a branch to work on a feature  
+
+TODO: insert create-feature-branch-msc
+
+=== Work on Feature Branch
+
+=== Finish Feature Branch
+
+Finnish?
