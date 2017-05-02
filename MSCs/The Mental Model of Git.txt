@@ -1,0 +1,32 @@
+title The Mental Model of Git
+
+note left of Dave: Dave the developer
+participant workingDirectory
+participant stagingArea
+participant localRepo
+participant remoteRepo
+
+Dave->remoteRepo: git clone $URL
+remoteRepo->*localRepo:  
+
+Dave->+localRepo: git checkout develop
+localRepo-->-workingDirectory:
+
+note over Dave: edit
+
+Dave->stagingArea: git add foo.c
+Dave->+localRepo: git commit -m"commit msg"
+localRepo->stagingArea:
+stagingArea-->-localRepo:
+
+note right of remoteRepo: always pull before push
+Dave->localRepo: git pull
+note over localRepo: pull ~= fetch & merge
+localRepo->+remoteRepo:
+remoteRepo-->-localRepo:
+
+note over localRepo: any merge conflicts reported here
+
+Dave->localRepo: git push
+localRepo->remoteRepo: 
+

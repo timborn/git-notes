@@ -4,23 +4,47 @@
 Git provides _many_ choices.  
 This is an attempt to reduce git and gitflow to a small enough, usable subset.  The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
 
-== Use Cases
+=== Use Cases
 
-sheep!
-bah! bah!
-rats!!
+/// image::images/gitflow-use-cases.png[git/gitflow Use Cases]
 
-image::images/gitflow-use-cases.png[git/gitflow Use Cases]
+== The Zen of Git
+Paulo Perrotta on Pluralsight did an outstanding job of explaining what really happens in git.  
+I found that key to being able to manage git.  
+The key point is the distinct areas: working directory, staging area and your (local) repository.  
+The advanced class adds a stash area.  
+Every git command operates on these areas; once you understand how they work together things become much more clear.
 
-== Standard Branching Model in GitFlow
+image::images/TheMentalModelofGit.png[The Zen of Git]
 
-TODO insert standard branching model here
+=== Standard Branching Model in GitFlow
 
-== XXXX
 
-include::feature-branch/feature-branch.adoc[]
+== Getting Started
 
-== XXXX
+== Scenario: Initialize Git Repository
+scenario: initialize git repositry +
+roles: architect +
+goal: create git repo with suitable gitflow branches and policies
 
-include::sections/about-version-control.asc[]
+image::images/InitializeGitRepo.png[]
 
+== Daily Cycle
+include::DailyCycle/DailyCycle.adoc[]
+
+== Feature Branches
+include::FeatureBranch/FeatureBranch.adoc[]
+
+== Release Branches
+actors: X, Y
+
+create, finish, push
+
+include::ReleaseBranch/ReleaseBranch.adoc[]
+
+== Hot Fixes
+actors: X, Y
+
+create, finish, push
+
+include::HotFixBranch/HotFixBranch.adoc[]

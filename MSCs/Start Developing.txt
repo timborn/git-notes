@@ -1,0 +1,9 @@
+title Start Developing
+
+note left of Dave: Dave the developer
+participant localRepo
+Dave->remoteRepo: git clone $URL
+remoteRepo->*localRepo:  
+
+Dave->localRepo: git checkout develop
+

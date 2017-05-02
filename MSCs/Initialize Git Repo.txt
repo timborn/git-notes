@@ -1,0 +1,21 @@
+title Initialize Git Repo
+
+Alice->localRepo: git init
+note left of Alice: Alice the architect
+Alice->localRepo: git flow init
+note over localRepo 
+    interactive --
+    sets up branching model
+end note 
+
+note left of Alice: start on master branch
+Alice->localRepo: git checkout master
+Alice->localRepo: git remote add origin $URL
+note left of localRepo: $URL is URL for remoteRepo
+note left of Alice: set upstream tracking
+Alice->localRepo: git push -u origin master
+
+Alice->localRepo: git checkout develop
+Alice->localRepo: git push origin develop
+note over localRepo, remoteRepo: initial push
+localRepo->remoteRepo: 
