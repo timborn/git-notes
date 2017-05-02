@@ -48,3 +48,26 @@ actors: X, Y
 create, finish, push
 
 include::HotFixBranch/HotFixBranch.adoc[]
+
+== Other
+
+TODO: get these admonitions to work correctly.
+
+TIP: if you use git from the command line, it will often give useful and explicit advice
+
+....
+pleasant:git-notes timborn$ git commit -m "checkpoint progress -- adding some basic structure and MSCs"
+[master 1e01051] checkpoint progress -- adding some basic structure and MSCs
+ Committer: timborn <timborn@pleasant.local>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+....

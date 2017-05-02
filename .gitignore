@@ -1,3 +1,5 @@
 *.lock
 *.swp
 *.html
+*.pdfmarks
+git-notes.pdf

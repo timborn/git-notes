@@ -14,3 +14,6 @@ $ ./watch.rb . git-notes    # when git-notes.html changes, signal safari
 
 Note also websequencediagrams.com does a nice job of accepting text input 
 for MSCs and rendering a graph for the book.
+
+Basic recipe for generating a PDF:
+bundle exec asciidoctor-pdf git-notes.adoc
