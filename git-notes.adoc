@@ -15,6 +15,11 @@ The key point is the distinct areas: working directory, staging area and your (l
 The advanced class adds a stash area.  
 Every git command operates on these areas; once you understand how they work together things become much more clear.
 
+image::images/GitMentalModel.png[The Mental Model of Git, 528, 496]
+
+The best thing you can do to really understand git is to walk through each of the common git commands and understand how it manipulates the working directory, the staging area, the local repo and the remote repo.
+Once you do that you will have a much better chance of using git and not doing too much damage.
+
 image::images/TheMentalModelofGit.png[The Zen of Git]
 
 === Standard Branching Model in GitFlow
