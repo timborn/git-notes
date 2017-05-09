@@ -1,4 +1,13 @@
-= Git & GitFlow Notes
+Git & GitFlow Notes
+=======
+:doctype:   book
+:docinfo:
+:toc:
+:toclevels: 2
+:front-cover-image: image:book/cover.png[width=1050,height=1600]
+
+include::book/preface.asc[]
+
 
 == Introduction
 Git provides _many_ choices.  
