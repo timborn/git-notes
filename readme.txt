@@ -17,3 +17,8 @@ for MSCs and rendering a graph for the book.
 
 Basic recipe for generating a PDF:
 bundle exec asciidoctor-pdf git-notes.adoc
+
+Mon May  8 19:44:35 CDT 2017
+----------------------------
+Before you can run 'guard' you may need 'bundle install' to get guard happy 
+(dependencies, you know).
