@@ -1,12 +1,27 @@
 = Git & GitFlow Notes
+Tim Born <Timothy.D.Born@JPMorgan.com>
+:icons: font
+
+
+TIP: when in Rome, do as the Romans do
 
 == Introduction
+Git is a version control system.
+Basically it is where we store documents, code, configuration settings, all kinds of things that we want to keep track of and _version_ as changes are made over time.
+
 Git provides _many_ choices.  
 This is an attempt to reduce git and gitflow to a small enough, usable subset.  The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
 
+There are many books and papers that describe git and gitflow.  
+This isn't meant to replace them, but to supplement them with project specifics.
+In general, gitflow builds upon git, so you must master git first.
+We are using _vanilla_ gitflow, so when in doubt, it's probably the simplest option.
+
 === Use Cases
 
-/// image::images/gitflow-use-cases.png[git/gitflow Use Cases]
+image::images/gitflow-use-cases.png[git/gitflow Use Cases]
+
+TODO: get a MUCH better use case diagram!
 
 == The Zen of Git
 Paulo Perrotta on Pluralsight did an outstanding job of explaining what really happens in git.  
@@ -15,10 +30,21 @@ The key point is the distinct areas: working directory, staging area and your (l
 The advanced class adds a stash area.  
 Every git command operates on these areas; once you understand how they work together things become much more clear.
 
+TODO: filter to remove branding on generated images
+
 image::images/GitMentalModel.png[The Mental Model of Git, 528, 496]
 
 The best thing you can do to really understand git is to walk through each of the common git commands and understand how it manipulates the working directory, the staging area, the local repo and the remote repo.
 Once you do that you will have a much better chance of using git and not doing too much damage.
+
+The other insight, especially if you come from other version control systems, is git is versioning a snapshot of the whole project, not a specific file.  
+There is no send of locking files, checking them out & in, or tagging a file with a version number.
+A version in git captures an entire filesystem -- all the files and directories -- at some point in time.
+
+Be aware that _commit_ in git-speak is commiting to the repo on your local machine. 
+Yes, you can commited your changes.
+No, none of your colleagues can see those changes until you _push_ them to the central repo.  
+You have been warned.
 
 image::images/TheMentalModelofGit.png[The Zen of Git]
 
@@ -35,24 +61,53 @@ goal: create git repo with suitable gitflow branches and policies
 image::images/InitializeGitRepo.png[]
 
 == Daily Cycle
-include::DailyCycle/DailyCycle.adoc[]
+
+[ TIP ]
+_"Remember that code is really the language in which we ultimately express the requirements."_ +
+- Uncle Bob Martin.
+
+TODO: include better pix emphasizing bouncing between develop and feature branches
+
+Dave the Developer has a daily cycle for creating new features.  
+We assume you already know how Dave got his git set up.
+If not, see section XXXXXXXXXXXX
+
+The daily cycle looks something like this:
+
+image::images/DeveloperDailyCycle.jpg[The Developer Daily Cycle]
+
+TODO: that image needs more pushes from _feature_ to _develop_ branch
+
+To start a new feature, Dave creates a _feature branch_ with a copy of the latest from _develop_ branch:
+----
+$ git flow feature branch start MyNewFeature
+----
+
+Periodically, when Dave has tested his code and sees that it doesn't break anything, he can (should) share (collaborate) by pushing his changes to the _develop_ branch.
+For production code, we use _pull requests_ to trigger code inspections.  
+Once the change is approved by two other people, Dave can merge his changes into _develop_, like this:
+
+image::images/PullRequestMerge.png[Pull Request Merge]
+
+
+TODO: that advice sounds stupid, as we have a policy of using Pull Requests.  No one will approve a PR for half-baked code.
+
+IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ branch will drift away and your colleagues will have less exposure to your work.  Therefore you want to push your work from the _feature_ branch to _develop_ frequently.
+
 
 == Feature Branches
-include::FeatureBranch/FeatureBranch.adoc[]
 
 == Release Branches
 actors: X, Y
 
 create, finish, push
 
-include::ReleaseBranch/ReleaseBranch.adoc[]
 
 == Hot Fixes
 actors: X, Y
 
 create, finish, push
 
-include::HotFixBranch/HotFixBranch.adoc[]
 
 == Other
 
