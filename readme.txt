@@ -24,6 +24,10 @@ Mon May  8 19:44:35 CDT 2017
 Before you can run 'guard' you may need 'bundle install' to get guard happy 
 (dependencies, you know).
 
+Favorite Browser Pages To Keep Handy
+http://brettterpstra.com/2011/03/07/watch-for-file-changes-and-refresh-your-browser-automatically/
+http://asciidoctor.org
+
 Mon May 15 14:29:34 CDT 2017
 ----------------------------
 Figured out the correct way to ivoke guard is 'bundle exec guard', even 

@@ -2,7 +2,6 @@
 Tim Born <Timothy.D.Born@JPMorgan.com>
 :icons: font
 
-
 TIP: when in Rome, do as the Romans do
 
 == Introduction
