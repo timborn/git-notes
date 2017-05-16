@@ -1,6 +1,7 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
 :icons: font
+:url-bitbucket: http://tss4w2116:7990/projects/USCIS
 
 TIP: when in Rome, do as the Romans do
 
@@ -16,11 +17,25 @@ This isn't meant to replace them, but to supplement them with project specifics.
 In general, gitflow builds upon git, so you must master git first.
 We are using _vanilla_ gitflow, so when in doubt, it's probably the simplest option.
 
+[ NOTE ] 
+====
+Since gitflow builds on git, there are many ways you can go to accomplish the same result.
+What I show are the gitflow commands on the command line.
+They are just a convenient shorthand for multiple steps in git, and you may be using a GUI wrapper, which further hides things.  
+You can install gitflow, but it's actually kind of slow, so find a solution that works for you.
+====
+
 === Use Cases
+One way to view this whole thing is through the lens of the different people (actors) and what they want to accomplish (goals).
+For this I use a Use Case Diagram, like this:
 
 image::images/gitflow-use-cases.png[git/gitflow Use Cases]
 
 TODO: get a MUCH better use case diagram!
+
+You should be able to identify your role in there somewhere, and find the corresponding section that details the world from that point of view.
+
+IMPORTANT: You may well have to operate in different roles at different times.
 
 == The Zen of Git
 Paulo Perrotta on Pluralsight did an outstanding job of explaining what really happens in git.  
@@ -79,9 +94,13 @@ The daily cycle looks something like this:
 
 image::images/DeveloperDailyCycle.jpg[The Developer Daily Cycle]
 
-TODO: that image needs more pushes from _feature_ to _develop_ branch
+TODO: how do we show the pushes from local to remote repo, still on feature branch?
 
-To start a new feature, Dave creates a _feature branch_ with a copy of the latest from _develop_ branch:
+TODO: maybe number those arrows to correspond to the steps shown below?
+
+That basically shows creating a new _feature_ branch from the _develop_ branch, writing the feature and finally completing the work, merging it into the _develop_ branch and killing off the _feature_ branch.  Let's look at that in more detail.
+
+To start a new feature, Dave creates a _feature_ branch with a copy of the latest from _develop_ branch:
 ----
 $ git flow feature branch start MyNewFeature
 ----
@@ -89,12 +108,39 @@ $ git flow feature branch start MyNewFeature
 Periodically, when Dave has tested his code and sees that it doesn't break anything, he can (should) share (collaborate) by pushing his changes to the central repo.
 Note that these changes are still on his _feature_ branch, but by being available on the central repo he can at least collaborate slightly better.
 
-Even better is when Dave shares with the wider product by pushing his changes to the central repo and onto the _develop_ branch.
+----
+$ git add .
+$ git commit -m "add new whizbit for MyNewFeature"
+$ git pull
+$ git push
+----
+
+TIP: _Always pull before you push._
+
+The code is always changing, and by __pull__ing, you are fetching all those changes from the central repo to your local repo, followed by a _merge_.  This is where merge conflicts can show up, and you want to deal with them locally before you _push_ your changes up to the central repo.
+
+The cycle of edit / commit / push continues until ...
+
+When the feature is complete, it's time to merge the changes into the _develop_ branch.
 This promotion, from _feature_ to _develop_, requires an inspection of two other people.
 For production code, we use _pull requests_ to trigger these code inspections.  
+A _pull request_ ends up looking like an email pointing to the specific changes being made.  
+This is best done using the web interface, as shown below:
+
+image::images/CreatingAPullRequest.png[Creating a Pull Request]
+On the left edge, select "Create pull request".
+
+image::images/CreatingAPullRequest2.png[Creating a Pull Request]
+This is where you select which branch you are proposing for the merge request.
+In our case it will always be feature/<something> being merged into _develop_ branch.
+
+TODO add URL for BitBucket {url-bitbucket}
+
 Once the change is approved by two other people, Dave can merge his changes into _develop_, like this:
 
 image::images/PullRequestMerge.png[Pull Request Merge]
+
+NOTE: Code inspection by two other people is a project policy for all production code.  Other repos may relex this to a single inspector (or less), depending on the criticality of the code.
 
 IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ branch will drift away and your colleagues will have less exposure to your work.  Therefore you want to push your work from the _feature_ branch to _develop_ frequently.
 
