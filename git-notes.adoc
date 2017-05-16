@@ -33,6 +33,10 @@ TODO: filter to remove branding on generated images
 
 image::images/GitMentalModel.png[The Mental Model of Git, 528, 496]
 
+Note well your local repo is on your _local_ machine.  
+You can commit all day and your collegues will not be able to collaborate.
+Commits are _necessary_ but not sufficient.  You need to _push_ your changes to the central repo for collaboration.
+
 The best thing you can do to really understand git is to walk through each of the common git commands and understand how it manipulates the working directory, the staging area, the local repo and the remote repo.
 Once you do that you will have a much better chance of using git and not doing too much damage.
 
@@ -82,14 +86,15 @@ To start a new feature, Dave creates a _feature branch_ with a copy of the lates
 $ git flow feature branch start MyNewFeature
 ----
 
-Periodically, when Dave has tested his code and sees that it doesn't break anything, he can (should) share (collaborate) by pushing his changes to the _develop_ branch.
-For production code, we use _pull requests_ to trigger code inspections.  
+Periodically, when Dave has tested his code and sees that it doesn't break anything, he can (should) share (collaborate) by pushing his changes to the central repo.
+Note that these changes are still on his _feature_ branch, but by being available on the central repo he can at least collaborate slightly better.
+
+Even better is when Dave shares with the wider product by pushing his changes to the central repo and onto the _develop_ branch.
+This promotion, from _feature_ to _develop_, requires an inspection of two other people.
+For production code, we use _pull requests_ to trigger these code inspections.  
 Once the change is approved by two other people, Dave can merge his changes into _develop_, like this:
 
 image::images/PullRequestMerge.png[Pull Request Merge]
-
-
-TODO: that advice sounds stupid, as we have a policy of using Pull Requests.  No one will approve a PR for half-baked code.
 
 IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ branch will drift away and your colleagues will have less exposure to your work.  Therefore you want to push your work from the _feature_ branch to _develop_ frequently.
 
