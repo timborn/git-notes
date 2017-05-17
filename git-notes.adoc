@@ -1,17 +1,20 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
+v0.1, May 2017: DRAFT
+
 :icons: font
 :url-bitbucket: http://tss4w2116:7990/projects/USCIS
 :url-pro-git-book: https://git-scm.com/book/en/v2/
 
-TIP: when in Rome, do as the Romans do
+TIP: When in Rome, do as the Romans do.
 
 == Introduction
 Git is a version control system.
 Basically it is where we store documents, code, configuration settings, all kinds of things that we want to keep track of and _version_ as changes are made over time.
 
 Git provides _many_ choices.  
-This is an attempt to reduce git and gitflow to a small enough, usable subset.  The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
+This is an attempt to reduce git and gitflow to a small enough, usable subset.
+The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
 
 There are many books and papers that describe git and gitflow.  
 This isn't meant to replace them, but to supplement them with project specifics.
