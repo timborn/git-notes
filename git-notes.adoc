@@ -2,6 +2,7 @@
 Tim Born <Timothy.D.Born@JPMorgan.com>
 :icons: font
 :url-bitbucket: http://tss4w2116:7990/projects/USCIS
+:url-pro-git-book: https://git-scm.com/book/en/v2/
 
 TIP: when in Rome, do as the Romans do
 
@@ -63,6 +64,10 @@ Be aware that _commit_ in git-speak is commiting to the repo on your local machi
 Yes, you can commited your changes.
 No, none of your colleagues can see those changes until you _push_ them to the central repo.  
 You have been warned.
+
+Here's a peek at how some of the most common git commands operate on the local and remote repositories.  See also https://git-scm.com/book/en/v2/Getting-Started-Git-Basics[git basics.]
+
+image::images/GitRepoCmds1.jpg[How Various Git Commands Operate on the Repos, width=700]
 
 image::images/TheMentalModelofGit.png[The Zen of Git]
 
