@@ -1,7 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
 v0.1, May 2017: DRAFT
-
 :icons: font
 :url-bitbucket: http://tss4w2116:7990/projects/USCIS
 :url-pro-git-book: https://git-scm.com/book/en/v2/
