@@ -2,8 +2,14 @@
 Tim Born <Timothy.D.Born@JPMorgan.com>
 v0.1, May 2017: DRAFT
 :icons: font
+:sectnums:
+:toc: left
 :url-bitbucket: http://tss4w2116:7990/projects/USCIS
 :url-pro-git-book: https://git-scm.com/book/en/v2/
+
+// I like the TOC on the left side.
+// TODO:
+// - 
 
 TIP: When in Rome, do as the Romans do.
 
@@ -151,8 +157,36 @@ NOTE: Code inspection by two other people is a project policy for all production
 
 IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ branch will drift away and your colleagues will have less exposure to your work.  Therefore you want to push your work from the _feature_ branch to _develop_ frequently.
 
+=== Scenario: Updating Your Copy of Your Repository
+
+=== Scenario: Commiting Your Changes
+
+=== Scenario: Pushing Your Changes to the Central Repository (BitBucket)
+Always pull before you push.
+This is where merge conflicts may happen.
+How to resolve merge conflicts?
 
 == Feature Branches
+
+=== Scenario: Starting to Work on a New Feature
+git flow feature start MyNewFeature
+
+=== Scenario: Publishing Your Work So Others Can See
+git flow feature publish
+
+=== Scenario: Finishing Your Feature
+git flow feature finish
+
+== Pull Requests
+Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
+
+A _pull request_ looks like this XXXXXXX
+
+You create a pull request HOW????
+
+If you are asked to approve a pull request, review the submitted code changes carefully, add any comments and decide if you want to approve or reject.
+
+When you _pull request_ has been approved (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
 
 == Release Branches
 actors: X, Y
@@ -166,11 +200,14 @@ actors: X, Y
 create, finish, push
 
 
+== Merge Conflicts
+What are they?  How to resolve them?
+
 == Other
 
 TODO: get these admonitions to work correctly.
 
-TIP: if you use git from the command line, it will often give useful and explicit advice
+== If You Use git From The Command Line, It Will Often Give Useful And Explicit Advice
 
 ....
 pleasant:git-notes timborn$ git commit -m "checkpoint progress -- adding some basic structure and MSCs"
