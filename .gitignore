@@ -3,3 +3,4 @@
 *.html
 *.pdfmarks
 git-notes.pdf
+npm-debug.log
