@@ -53,6 +53,10 @@ The key point is the distinct areas: working directory, staging area and your (l
 The advanced class adds a stash area.  
 Every git command operates on these areas; once you understand how they work together things become much more clear.
 
+A git version identifier identifies a unique state of the file system and all files within it.  It does not version files, but the entire repository.
+
+In git, _commit_ puts a copy into your local repository, but since it's local and hasn't left your machine, you are not yet sharing.  You need to understand and use _git push_ in order to collaborate effectively.
+
 TODO: filter to remove branding on generated images
 
 image::images/GitMentalModel.png[The Mental Model of Git, 528, 496]
@@ -207,7 +211,7 @@ What are they?  How to resolve them?
 
 TODO: get these admonitions to work correctly.
 
-== If You Use git From The Command Line, It Will Often Give Useful And Explicit Advice
+=== If You Use git From The Command Line, It Will Often Give Useful And Explicit Advice
 
 ....
 pleasant:git-notes timborn$ git commit -m "checkpoint progress -- adding some basic structure and MSCs"
