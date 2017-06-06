@@ -4,7 +4,7 @@ v0.1, June 4, 2017: DRAFT
 :icons: font
 :sectnums:
 :toc: left
-:url-bitbucket: http://tss4w2116:7990/projects/USCIS
+:url-bitbucket: http://tss4w2116:7990/projects
 :url-pro-git-book: https://git-scm.com/book/en/v2/
 
 // I like the TOC on the left side.
@@ -183,24 +183,92 @@ How to resolve merge conflicts?
 If you are a developer working within the _git flow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
 We walk through all those scenarios in this section.
 
-=== Scenario: Initializing A New Repository
-```
-$ git clone ssh:foobar
-$ git flow init
-INSERT DIALOG HERE
-```
+[#img-sunset]
+.A Developer's View
+image::images/DeveloperFocus.png[Feature Branches]
+// TODO: figure out how to get figure numbers somehow relative to section numbers
+// or capture the figure number in a macro so I can refer to it later
 
-This is important as it sets up your _local_ repository to assume gitflow pattern.
+This diagram shows the develop/ branch, which exists forever, and a couple of feature/ branches, which are created and then destroyed as features are created and merged into develop/.
+
+=== Scenario: Initializing A New Repository For Git Flow
+When you clone a repository you get a local copy of the whole repo on your machine.
+To use the git flow pattern, you will need to initialize it (once), and shown below.
+
+```
+$ git clone  http://me@server/scm/prod/ABS.git
+Cloning into 'ABS'...
+Password for 'http://me@server':
+remote: Counting objects: 352, done.
+remote: Compressing objects: 100% (216/216), done.
+remote: Total 352 (delta 122), reused 352 (delta 122)
+Receiving objects: 100% (352/352), 3.75 MiB | 348.00 KiB/s, done.
+Resolving deltas: 100% (122/122), done.
+Checking connectivity... done.
+ 
+$ git flow init
+Initialized empty Git repository in /cygdrive/c/Users/me/ABS/.git/
+No branches exist yet. Base branches must be created now.
+Branch name for production releases: [master]
+Branch name for "next release" development: [develop]
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [/cygdrive/c/Users/me/ABS/.git/hooks]
+```
 Take all the defaults for various branch names.
 
 === Scenario: Starting to Work on a New Feature
+Once you have a cloned repo and it has been initialized to understand the git flow pattern, you are ready to create a feature branch to work on.
 ```
 $ git flow feature start MyNewFeature
 ```
+In Figure 1, this represents the line from develop/ to feature/ indicating the creation of a new feature branch.
+
+At this point you are probably on the correct branch, but you can check, like this:
+```
+$ git branch --list
+  develop
+* feature/MyNewFeature
+  master
+```
+This tells you your edits & commits are on your feature branch.  
+Start coding!
 
 === Scenario: Publishing Your Work So Others Can See
+It is important to collaborate, so we share our code, even our feature branches, using the central repository.
+Your code is not (yet) merged on to develop/ so it doesn't need a _pull request_ and approvers, but you do need to get a copy of your feature branch on the central server so others can collaborate.
+In git flow this is _publish_.
 ```
-$ git flow feature publish
+$ git flow feature publish 
+
+...
+Summary of actions:
+- the remote branch 'feature/MyNewFeature' was created or updated
+- the local branch 'feature/MyNewFeature' was configured to track the remote branch
+- You are now on branch 'feature/MyNewFeature'
+```
+
+TODO: does _git flow feature publish_ really not require the feature branch name?
+
+=== Scenario: Collaborating With Someone On A Feature Branch
+TODO: how does 2nd person see and get a copy of a feature branch on central repo?
+
+You can see all branches, both locally and on the central repository:
+```
+$ git branch --list -a
+```
+
+Per _git flow cheatsheet_ (https://danielkummer.github.io/git-flow-cheatsheet):
+```
+$ git flow feature pull origin MyNewFeature
+
+# Good, but you also want to track changes so pull & push work as expected
+$ git flow feature track MyNewFeature
 ```
 
 === Scenario: Finishing Your Feature
@@ -223,9 +291,9 @@ If you are asked to approve a pull request, review the submitted code changes ca
 When you _pull request_ has been approved (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
 
 == Release Branches
-actors: X, Y
-
-create, finish, push
+[#img-sunset]
+.An Admin View
+image::images/AdminFocus.png[Release Branches]
 
 
 == Hot Fixes
