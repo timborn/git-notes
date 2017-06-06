@@ -34,6 +34,12 @@ They are just a convenient shorthand for multiple steps in git, and you may be u
 You can install gitflow, but it's actually kind of slow, so find a solution that works for you.
 ====
 
+Throughout the document we show snippets of the commands you would type if you are using _git flow_ from the command line, as shown below.  If you are new to using the command line, the '$' is the prompt, not something you need to type.
+```
+$ date
+Tue Jun  6 07:35:06 CDT 2017
+```
+
 === Use Cases
 One way to view this whole thing is through the lens of the different people (actors) and what they want to accomplish (goals).
 For this I use a Use Case Diagram, like this:
@@ -174,15 +180,26 @@ This is where merge conflicts may happen.
 How to resolve merge conflicts?
 
 == Feature Branches
+If you are a developer working within the _git flow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
+We walk through all those scenarios in this section.
 
 === Scenario: Starting to Work on a New Feature
-git flow feature start MyNewFeature
+```
+$ git flow feature start MyNewFeature
+```
 
 === Scenario: Publishing Your Work So Others Can See
-git flow feature publish
+```
+$ git flow feature publish
+```
 
 === Scenario: Finishing Your Feature
-git flow feature finish
+```
+$ git flow feature finish MyNewFeature
+```
+
+TODO: this merges? your feature branch into develop/ and deletes the feature branch.  
+You end up on develop/ in your working directory.
 
 == Pull Requests
 Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
