@@ -183,6 +183,16 @@ How to resolve merge conflicts?
 If you are a developer working within the _git flow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
 We walk through all those scenarios in this section.
 
+=== Scenario: Initializing A New Repository
+```
+$ git clone ssh:foobar
+$ git flow init
+INSERT DIALOG HERE
+```
+
+This is important as it sets up your _local_ repository to assume gitflow pattern.
+Take all the defaults for various branch names.
+
 === Scenario: Starting to Work on a New Feature
 ```
 $ git flow feature start MyNewFeature
