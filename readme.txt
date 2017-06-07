@@ -38,3 +38,11 @@ when I run 'asciidoctor foo.adoc'??
 I generated a Guardfile ('bundle exec guard init') and commented out the 
 asciidoctor stuff and added a line in the shell to invoke asciidoctor
 directly, and it works great.  See also: https://github.com/guard/guard
+
+Wed Jun  7 15:44:30 CDT 2017
+----------------------------
+asciidoctor-epub3 git-notes.adoc
+asciidoctor-epub3 -a ebook-format=kf8 git-notes.adoc
+
+Neither of these work (yet).  I made git-notes.adoc a 'book' type, which cleared some of the errors, 
+but some remain.
