@@ -1,6 +1,7 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
 v0.1, June 7, 2017: DRAFT
+:doctype: book
 :icons: font
 :sectnums:
 :toc: left
