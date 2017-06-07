@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.1, June 4, 2017: DRAFT
+v0.1, June 7, 2017: DRAFT
 :icons: font
 :sectnums:
 :toc: left
@@ -11,40 +11,44 @@ v0.1, June 4, 2017: DRAFT
 // TODO:
 // - 
 
-TIP: When in Rome, do as the Romans do.
-
 == Introduction
 Git is a version control system.
 Basically it is where we store documents, code, configuration settings, all kinds of things that we want to keep track of and _version_ as changes are made over time.
 
 Git provides _many_ choices.  
-This is an attempt to reduce git and gitflow to a small enough, usable subset.
+This is an attempt to reduce git and GitFlow to a small enough, usable subset.
 The intended audience is people who are familiar with version control in general, possibly just getting started with git, looking to get their head around a workable solution for ~10 teams.
 
-There are many books and papers that describe git and gitflow.  
+There are many books and papers that describe git and GitFlow.  
 This isn't meant to replace them, but to supplement them with project specifics.
-In general, gitflow builds upon git, so you must master git first.
-We are using _vanilla_ gitflow, so when in doubt, it's probably the simplest option.
+In general, GitFlow builds upon git, so you must master git first.
+We are using _vanilla_ GitFlow, so when in doubt, it's probably the simplest option.
 
-[ NOTE ] 
-====
-Since gitflow builds on git, there are many ways you can go to accomplish the same result.
-What I show are the gitflow commands on the command line.
+=== About This Book
+Since GitFlow builds on git, there are many ways you can go to accomplish the same result.
+What I show are the GitFlow commands on the command line.
 They are just a convenient shorthand for multiple steps in git, and you may be using a GUI wrapper, which further hides things.  
-You can install gitflow, but it's actually kind of slow, so find a solution that works for you.
-====
+You can install GitFlow scripts, but they are actually kind of slow, so find a solution that works for you.
+The Visual Studio GitFlow extension is a light wrapper around the same GitFlow scripts used at the command line, so they aren't any faster. 
+Be patient.
 
-Throughout the document we show snippets of the commands you would type if you are using _git flow_ from the command line, as shown below.  If you are new to using the command line, the '$' is the prompt, not something you need to type.
+Throughout the document we show snippets of the commands you would type if you are using _GitFlow_ from the command line, as shown below.  If you are new to using the command line, the '$' is the prompt, not something you need to type.
 ```
 $ date
 Tue Jun  6 07:35:06 CDT 2017
 ```
 
+=== Acknowledgements
+Thanks to Kevin Lynch for much of the art work, helping to clarify the effects of the operations on the branches.
+
+Some of the art work was borrowed from the seminal GitFlow paper, http://nvie.com/posts/a-successful-git-branching-model/["A Successful Git Branching Model"] by Vincent Driessen.  
+Vincent formalized a set of common patterns for groups working together using git, and it has become well established.
+
 === Use Cases
 One way to view this whole thing is through the lens of the different people (actors) and what they want to accomplish (goals).
 For this I use a Use Case Diagram, like this:
 
-image::images/gitflow-use-cases.png[git/gitflow Use Cases]
+image::images/gitflow-use-cases.png[git/GitFlow Use Cases]
 
 TODO: get a MUCH better use case diagram!
 
@@ -53,17 +57,15 @@ You should be able to identify your role in there somewhere, and find the corres
 IMPORTANT: You may well have to operate in different roles at different times.
 
 == The Zen of Git
-Paulo Perrotta on Pluralsight did an outstanding job of explaining what really happens in git.  
+https://www.pluralsight.com/authors/paolo-perrotta[Paulo Perrotta on Pluralsight] did an outstanding job of explaining what really happens in git.  
 I found that key to being able to manage git.  
 The key point is the distinct areas: working directory, staging area and your (local) repository.  
 The advanced class adds a stash area.  
-Every git command operates on these areas; once you understand how they work together things become much more clear.
+Every git command operates on these areas; once you understand how they work together things become _much_ more clear.
 
 A git version identifier identifies a unique state of the file system and all files within it.  It does not version files, but the entire repository.
 
 In git, _commit_ puts a copy into your local repository, but since it's local and hasn't left your machine, you are not yet sharing.  You need to understand and use _git push_ in order to collaborate effectively.
-
-TODO: filter to remove branding on generated images
 
 image::images/GitMentalModel.png[The Mental Model of Git, 528, 496]
 
@@ -78,10 +80,13 @@ The other insight, especially if you come from other version control systems, is
 There is no send of locking files, checking them out & in, or tagging a file with a version number.
 A version in git captures an entire filesystem -- all the files and directories -- at some point in time.
 
+[IMPORTANT]
+====
 Be aware that _commit_ in git-speak is commiting to the repo on your local machine. 
-Yes, you can commited your changes.
+Yes, you commited your changes.
 No, none of your colleagues can see those changes until you _push_ them to the central repo.  
 You have been warned.
+====
 
 Here's a peek at how some of the most common git commands operate on the local and remote repositories.  See also https://git-scm.com/book/en/v2/Getting-Started-Git-Basics[git basics.]
 
@@ -100,7 +105,7 @@ image::images/TheMentalModelofGit.png[The Zen of Git]
 == Scenario: Initialize Git Repository
 scenario: initialize git repositry +
 roles: architect +
-goal: create git repo with suitable gitflow branches and policies
+goal: create git repo with suitable GitFlow branches and policies
 
 image::images/InitializeGitRepo.png[]
 
@@ -180,7 +185,7 @@ This is where merge conflicts may happen.
 How to resolve merge conflicts?
 
 == Feature Branches
-If you are a developer working within the _git flow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
+If you are a developer working within the _GitFlow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
 We walk through all those scenarios in this section.
 
 [#img-sunset]
@@ -193,7 +198,7 @@ This diagram shows the develop/ branch, which exists forever, and a couple of fe
 
 === Scenario: Initializing A New Repository For Git Flow
 When you clone a repository you get a local copy of the whole repo on your machine.
-To use the git flow pattern, you will need to initialize it (once), and shown below.
+To use the GitFlow pattern, you will need to initialize it (once), and shown below.
 
 ```
 $ git clone  http://me@server/scm/prod/ABS.git
@@ -223,7 +228,7 @@ Hooks and filters directory? [/cygdrive/c/Users/me/ABS/.git/hooks]
 Take all the defaults for various branch names.
 
 === Scenario: Starting to Work on a New Feature
-Once you have a cloned repo and it has been initialized to understand the git flow pattern, you are ready to create a feature branch to work on.
+Once you have a cloned repo and it has been initialized to understand the GitFlow pattern, you are ready to create a feature branch to work on.
 ```
 $ git flow feature start MyNewFeature
 ```
@@ -242,7 +247,7 @@ Start coding!
 === Scenario: Publishing Your Work So Others Can See
 It is important to collaborate, so we share our code, even our feature branches, using the central repository.
 Your code is not (yet) merged on to develop/ so it doesn't need a _pull request_ and approvers, but you do need to get a copy of your feature branch on the central server so others can collaborate.
-In git flow this is _publish_.
+In GitFlow this is _publish_.
 ```
 $ git flow feature publish 
 
