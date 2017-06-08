@@ -46,3 +46,8 @@ asciidoctor-epub3 -a ebook-format=kf8 git-notes.adoc
 
 Neither of these work (yet).  I made git-notes.adoc a 'book' type, which cleared some of the errors, 
 but some remain.
+
+Thu Jun  8 16:34:06 CDT 2017
+----------------------------
+https://github.com/asciidoctor/asciidoctor-epub3#structuring-your-manuscript
+
