@@ -199,6 +199,9 @@ $ git pull
 $ git push
 ----
 
+
+image::images/pullme-pushyou.jpg[Pull Before Push, 200]
+
 TIP: _Always pull before you push._
 
 The code is always changing, and by __pull__ing, you are fetching all those changes from the central repo to your local repo, followed by a _merge_.  This is where merge conflicts can show up, and you want to deal with them locally before you _push_ your changes up to the central repo.
