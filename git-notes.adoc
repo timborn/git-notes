@@ -6,6 +6,7 @@ v0.1, June 12, 2017: DRAFT
 :sectnums:
 :toc: left
 :url-bitbucket: http://tss4w2116:7990/projects
+:url-cookbook: http://tss4w2116:7990/projects/timborn/cookbook
 :url-pro-git-book: https://git-scm.com/book/en/v2/
 
 // I like the TOC on the left side.
@@ -112,12 +113,54 @@ There are a number of scripts and extensions that can help:
 
 Each of these is found in the gitflow repository in the NONPROD project on BitBucket.
 
-== Scenario: Initialize Git Repository
+== Scenario: Clone Git Repository
+Cloning a git repo is the same for git & gitflow.  
+Nothing special here.
+
+----
+$ git clone  http://me@server/scm/prod/ABS.git
+Cloning into 'ABS'...
+Password for 'http://me@server':
+remote: Counting objects: 352, done.
+remote: Compressing objects: 100% (216/216), done.
+remote: Total 352 (delta 122), reused 352 (delta 122)
+Receiving objects: 100% (352/352), 3.75 MiB | 348.00 KiB/s, done.
+Resolving deltas: 100% (122/122), done.
+Checking connectivity... done.
+----
+
+== Scenario: Initializing A Repository For Git Flow
 scenario: initialize git repositry +
 roles: architect +
 goal: create git repo with suitable GitFlow branches and policies
 
-image::images/InitializeGitRepo.png[]
+Initializing your local repo so it knows you intend to use gitflow policies is essential, otherwise gitflow refuses to work:
+
+----
+$ git flow feature
+fatal: Not a gitflow-enabled repo yet. Please run "git flow init" first.
+----
+
+When you clone a repository you get a local copy of the whole repo on your machine.
+To use the GitFlow pattern, you will need to initialize it (once), and shown below.
+
+----
+$ git flow init
+Initialized empty Git repository in /cygdrive/c/Users/me/ABS/.git/
+No branches exist yet. Base branches must be created now.
+Branch name for production releases: [master]
+Branch name for "next release" development: [develop]
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [/cygdrive/c/Users/me/ABS/.git/hooks]
+----
+
+Take all the defaults for various branch names.
 
 == Daily Cycle
 
@@ -160,7 +203,7 @@ TIP: _Always pull before you push._
 
 The code is always changing, and by __pull__ing, you are fetching all those changes from the central repo to your local repo, followed by a _merge_.  This is where merge conflicts can show up, and you want to deal with them locally before you _push_ your changes up to the central repo.
 
-The cycle of edit / commit / push continues until ...
+The cycle of edit / commit / pull / push continues until ...
 
 When the feature is complete, it's time to merge the changes into the _develop_ branch.
 This promotion, from _feature_ to _develop_, requires an inspection of two other people.
@@ -206,41 +249,10 @@ image::images/DeveloperFocus.png[Feature Branches]
 
 This diagram shows the develop/ branch, which exists forever, and a couple of feature/ branches, which are created and then destroyed as features are created and merged into develop/.
 
-=== Scenario: Initializing A New Repository For Git Flow
-When you clone a repository you get a local copy of the whole repo on your machine.
-To use the GitFlow pattern, you will need to initialize it (once), and shown below.
-
-```
-$ git clone  http://me@server/scm/prod/ABS.git
-Cloning into 'ABS'...
-Password for 'http://me@server':
-remote: Counting objects: 352, done.
-remote: Compressing objects: 100% (216/216), done.
-remote: Total 352 (delta 122), reused 352 (delta 122)
-Receiving objects: 100% (352/352), 3.75 MiB | 348.00 KiB/s, done.
-Resolving deltas: 100% (122/122), done.
-Checking connectivity... done.
- 
-$ git flow init
-Initialized empty Git repository in /cygdrive/c/Users/me/ABS/.git/
-No branches exist yet. Base branches must be created now.
-Branch name for production releases: [master]
-Branch name for "next release" development: [develop]
-How to name your supporting branch prefixes?
-Feature branches? [feature/]
-Bugfix branches? [bugfix/]
-Release branches? [release/]
-Hotfix branches? [hotfix/]
-Support branches? [support/]
-Version tag prefix? []
-Hooks and filters directory? [/cygdrive/c/Users/me/ABS/.git/hooks]
-```
-Take all the defaults for various branch names.
-
 === Scenario: Starting to Work on a New Feature
 Once you have a cloned repo and it has been initialized to understand the GitFlow pattern, you are ready to create a feature branch to work on.
 ```
-$ git flow feature start MyNewFeature
+$ git flow feature start MyNewFeature    # creates branch feature/MyNewFeature
 ```
 In Figure 1, this represents the line from develop/ to feature/ indicating the creation of a new feature branch.
 
@@ -305,11 +317,55 @@ If you are asked to approve a pull request, review the submitted code changes ca
 
 When you _pull request_ has been approved (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
 
+== Exercise #1 - Be A Developer
+_"Be the ball"_ - Ty Webb (Chevy Chase), Caddyshack
+
+At this point you know enough to be able to demonstrate what a developer's life looks like, bouncing between feature/ and develop/ branches.
+
+For this exercise we will build a cookbook, composed of many recipes.
+The cookbook is formatted in html, so it's trivial to view in your browser.
+The server repo is {url-cookbook}.
+
+. Did you do your homework?  This is much easier if you come prepared ...
+. Clone The Repository
+. Initialize Your Local Repo For GitFlow
+.. This May Require You To Install GitFlow
+. Create A Feature Branch
+. Edit
+.. Add A New Recipe; Place It In It's Own XXX.html File
+.. Be Sure To Add A Link To Your Recipe In The Main Cookbook.html
+. ... the usual git add / commit / pull ...
+. Create Pull Request
+.. Probably Done Most Easily From BitBucket {url-bitbucket}
+.. You Will Need To Specify At Least Two People To Review+Approve Your Changes
+. When You Have At Least Two Approvers, Merge Your Changes
+. Finish Your Feature Branch
+.. git flow feature finish
+
 == Release Branches
-[#img-sunset]
+While a developer focuses on the creation of feature/ branches, then merging them into develop/, the other branches are used for different roles.
+The release/ branch is the concern of the _release engineer_, who creates the release/ branch when it's close to time for a new release.
+The purpose of the release/ branch is to stabilize the features so they can be merged to master/ branch and deployed.
+
 .An Admin View
 image::images/AdminFocus.png[Release Branches]
 
+
+=== Scenario: Create A New Release
+A new release/ branch is created based on the current develop/ branch.
+
+----
+$ git flow release start RC26-1      # think 'Release Candidate'
+----
+
+=== Scenario: Stabilize The Release
+If your release/ branch isn't quite up to snuff, you create a bugfix/ branch, analogous to a feature/ branch, for the changes.
+
+=== Scenario: Finish The Release
+The release/ branch is deemed ready, so release/ is merged with master/ and deployed.
+This defines the new version of what is in production.
+release/ must also be merged with develop/, so all the stability changes are not lost.
+Then the release/ branch is destroyed.
 
 == Hot Fixes
 actors: X, Y
