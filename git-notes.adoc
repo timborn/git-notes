@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.1, June 7, 2017: DRAFT
+v0.1, June 12, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -102,6 +102,15 @@ image::images/TheMentalModelofGit.png[The Zen of Git]
 
 
 == Getting Started
+Gitflow is a set of policies and conventions implemented on top of git.
+While it is possible to use gitflow policies just using straight gitflow, most people find that awkward.
+There are a number of scripts and extensions that can help:
+
+. gitflow scripts (v0.4.1)
+. gitflow for Visual Studio 2013 (v 1.1.0.0)
+. gitflow for Visual Studio 2015 (v 1.1.0.0)
+
+Each of these is found in the gitflow repository in the NONPROD project on BitBucket.
 
 == Scenario: Initialize Git Repository
 scenario: initialize git repositry +
