@@ -200,7 +200,7 @@ $ git push
 ----
 
 
-image::images/pullme-pushyou.jpg[Pull Before Push, 200]
+image::images/pullme-pushyou.jpg[Pull Before Push, 300]
 
 TIP: _Always pull before you push._
 
