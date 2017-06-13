@@ -513,6 +513,46 @@ BitBucket ({url-bitbucket}) is a commercial (Atlassian) version of a git server.
 Our copy is set up so all of us can create our own repositories, so you can experiment to your heart's content.
 In this section I would like to quickly show how to set up a sample repo with the gitflow policies similar to that used for production code.
 
+=== Create Your Own Repository
+Start on the BitBucket website, and observe that you (yes, you!) have your own space for creating git repositories. 
+Go ahead and create one.
+
+image::images/bitbucket-1.jpg[BitBucket 1]
+
+When you poke the _Create repository_ button, you need to fill in some basic information:
+
+image::images/bitbucket-2.jpg[BitBucket 1]
+
+When your repo is created, you get a page with details of how to populate it.
+At this point you want to add something, anything (readme.txt, perhaps?) because in the next step we need to create the initial develop/ branch, and you can't do that when the master/ is empty.
+
+image::images/bitbucket-3.jpg[BitBucket 1]
+
+=== Create develop/ Branch
+You need to manually create the initial develop/ branch.  All the others "just work".
+
+image::images/bitbucket-4.jpg[BitBucket 1]
+
+image::images/bitbucket-5.jpg[BitBucket 1]
+
+=== Set Permissions
+For both master/ and develop/, set the 'Branch permissions' so no one can rewrite history, make changes without a pull request, or delete these branches.
+
+image::images/bitbucket-6.jpg[BitBucket 1]
+
+Under 'Pull requests' set the number of approvers required:
+
+image::images/bitbucket-7.jpg[BitBucket 1]
+
+Under 'Branching model', Development uses develop/, Production uses master/.  
+All the other defaults are fine.
+At the bottom of that same screen is a checkbox for automatic merging (after approvals). 
+That's optional.  Your choice.
+
+image::images/bitbucket-8.jpg[BitBucket 1]
+
+That should be it.
+You now have your own repo with suitable gitflow polcies applied that you can experiment with to your heart's content.
 
 == Other
 
