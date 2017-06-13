@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.1, June 12, 2017: DRAFT
+v0.1, June 13, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -309,6 +309,121 @@ $ git flow feature finish MyNewFeature
 TODO: this merges? your feature branch into develop/ and deletes the feature branch.  
 You end up on develop/ in your working directory.
 
+=== Scenario: What If We Have A GitFlow Policy Of Two Approvers?
+As a way to ensure changes get multiple sets of eyes, it's possible to 'protect' a branch by requiring that the merge occur via _pull requests_.  
+One common policy protecting production code takes this even further, requiring _two_ people approve the changes before the merge can occur.
+
+But what if you forget (or try to step around the policy)?
+
+----
+$ git flow feature finish
+Switched to branch 'develop'
+Your branch is up-to-date with 'origin/develop'.
+Updating acf8892..cfea370
+Fast-forward
+readme.txt | 2 ++
+1 file changed, 2 insertions(+)
+create mode 100644 readme.txt
+remote: Kilroy was here (on the server)
+To ssh://git@gitserver:7999/~iwannasid/gitflow-sandbox.git
+- [deleted]         feature/01-make-ockert-happy
+Deleted branch feature/01-make-ockert-happy (was cfea370).
+ 
+Summary of actions:
+- The feature branch 'feature/01-make-ockert-happy' was merged into 'develop'
+- Feature branch 'feature/01-make-ockert-happy' has been locally deleted; it has been remotely deleted from 'origin'
+- You are now on branch 'develop'
+ 
+ 
+$ ### looks good so far ... says it merged to develop ... killed off my branch ...
+$ git branch
+* develop
+  master
+ 
+$ git status
+On branch develop
+Your branch is ahead of 'origin/develop' by 1 commit.
+  (use "git push" to publish your local commits)
+nothing to commit, working directory clean
+ 
+$ git pull
+remote: Counting objects: 2, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 2 (delta 0), reused 0 (delta 0)
+Unpacking objects: 100% (2/2), done.
+From ssh://gitserver:7999/~iwannasid/gitflow-sandbox
+   acf8892..3dfda19  develop    -> origin/develop
+   d350f8a..afc18b4  master     -> origin/master
+Merge made by the 'recursive' strategy.
+foo                 | 4 +---
+update              | 2 ++
+words-of-wisdom.txt | 2 ++
+3 files changed, 5 insertions(+), 3 deletions(-)
+create mode 100755 update
+create mode 100644 words-of-wisdom.txt
+ 
+$ git push
+Counting objects: 5, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 709 bytes | 0 bytes/s, done.
+Total 5 (delta 0), reused 0 (delta 0)
+remote:                             *%%%%%.
+remote:                         %%%         %%%
+remote:                      ,%#               %%
+remote:                     %%                   %%
+remote:                    %#                     %%
+remote:                   %%                       %
+remote:                   %(                       %%
+remote:                   %%%%%%%%%%%%%%%%%%%%%%%%%%%
+remote:                 %#%*%#///////%# %%///////%%%%%%
+remote:                ,% %*%%******%#   %%******%(%%,%
+remote:                  %%/ %%/**%%/%%%%%%%(**#%( %%#
+remote:                   %%          %%%          %(
+remote:                    %                      .%
+remote:                    *%        %%%%%       .%
+remote:                      %#                 %%
+remote:                       .%%            .%%
+remote:                       .%%.%%,     %%%.%%/
+remote:                 %%%%%%##%.  #%%%%%.  .%((%%%%%%
+remote:             %%#(((((((((%%,         #%%(((((((((#%%.
+remote:       %%%((((((((((((((((((%%%, .%%%((((((((((((((((((#%%*
+remote:     %%(((((((((((((((((((((((((%(((((((((((((((((((((((((#%.
+remote:   ,%(((((((((((((((((((((((((((((((((((((((((((((((((((((((%#
+remote:   %#((((((((((((((((((((((((((((((((((((((((((((((((((((((((%
+remote:   %%%%%%%%%%%%%(((((((((((((((((((((((((((((((((%%%%%%%%%%%%%
+remote:  %%            %####((((((###%%%%%%%%#(((((((((%            ,%
+remote: ,%             %%%%%%#.               %%%((((((%*            %%
+remote: #%                                       %%%#                %%
+remote: .%                             .%%%%%%%%%                    %#
+remote:  %                         #%%%                              %
+remote:  %                     %%%%                                  %*
+remote: /%************/#%%%%%%######%%*                        ..,*/(%%
+remote:               %%######(((((((##################%%
+remote:               %%######(((((((((((((((((((((((((%%
+remote: //////////////%%%%%%%%#########################%%/////////  ///
+remote: ----------------------------------------------------
+remote: Branch refs/heads/develop can only be modified through pull requests.
+remote: Check your branch permissions configuration with the project administrator.
+remote: ----------------------------------------------------
+remote:
+To ssh://git@gitserver:7999/~iwannasid/gitflow-sandbox.git
+! [remote rejected] develop -> develop (pre-receive hook declined)
+error: failed to push some refs to 'ssh://git@gitserver:7999/~iwannasid/gitflow-sandbox.git'
+----
+
+The gitflow policy is enforced on the server.
+So while it _did_ merge my changes with the develop/ branch, those changes are only local to my machine, and I have no way to push them to the server.
+
+Your changes are not lost, but unwinding them may be interesting.
+It is an exercise left to the reader to determine how to reverse the merge to develop/ to extract the changes from the feature/ branch so you can try again using a _pull request_.
+
+Hint:
+
+. When git told us it deleted our feature/ branch, it told us _exactly_ which branch that was (`Deleted branch feature/01-make-ockert-happy (was cfea370)`).
+. Git garbage collects old nodes ... eventually, so if you know the exact name of a node, you might be able to catch it if you act before the garbage collector.
+. Moving HEAD backward in time is straightward, so we can move the mainline "back in time".
+
 == Pull Requests
 Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
 
@@ -370,6 +485,20 @@ This defines the new version of what is in production.
 release/ must also be merged with develop/, so all the stability changes are not lost.
 Then the release/ branch is destroyed.
 
+== Exercise #2 - Be A Release Engineer
+You now know enough to manage a release/ branch through to production.
+
+. Did you do your homework? This is much easier if you come prepared ...
+. Create A New Release Candidate
+.. Examine The Branching Structure To See That Your Release Branch Is Created
+. Create A bugfix/ Branch Off The Release Branch
+. Add Some 'Stabilizing Fix', Commit The Change
+. Use A Pull Request To Merge bugfix/ Into release/
+.. Remember: In Production, master/ release/ and develop/ Are All Protected By 'Two Approver' Policy
+. Finish Your Release Branch
+.. Once Again, Be Aware That You Will Need A Pull Request To Merge To master/
+.. Observe That Your Changes Are In Both master/ and develop/
+
 == Hot Fixes
 actors: X, Y
 
@@ -378,6 +507,12 @@ create, finish, push
 
 == Merge Conflicts
 What are they?  How to resolve them?
+
+== BitBucket
+BitBucket ({url-bitbucket}) is a commercial (Atlassian) version of a git server.
+Our copy is set up so all of us can create our own repositories, so you can experiment to your heart's content.
+In this section I would like to quickly show how to set up a sample repo with the gitflow policies similar to that used for production code.
+
 
 == Other
 
