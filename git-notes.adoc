@@ -576,3 +576,11 @@ After doing this, you may fix the identity used for this commit with:
 
     git commit --amend --reset-author
 ....
+
+=== The Hallquist Invariant 
+When you use gitflow as described, after you merge a release/ branch to master/, what you had on the tip of release/ should _exactly_ match when becomes the new master/.
+
+This isn't because the 'merge' on master/ is overwriting everything. 
+It's because all the changes in that release/ include everything on master/ already.
+
+This is why Ray believes we can test release/ and ship those binaries without violating that other important invariant: _master/ represents what is in production_.
