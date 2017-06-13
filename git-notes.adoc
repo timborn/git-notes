@@ -500,10 +500,15 @@ You now know enough to manage a release/ branch through to production.
 .. Observe That Your Changes Are In Both master/ and develop/
 
 == Hot Fixes
-actors: X, Y
+actors: fixers
 
-create, finish, push
+events: create, finish, push
 
+If you have done the preceding exercises, you already know everything there is to know.
+hotfix/ is created off master/ when it is needed to a fix to production (master/).
+master/ is "protected" by gitflow polcies of "two approvers", so you need to create a branch off master/ and use _git pull_ to merge it back into master/.
+
+Q.E.D.
 
 == Merge Conflicts
 What are they?  How to resolve them?
