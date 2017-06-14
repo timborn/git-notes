@@ -51,3 +51,7 @@ Thu Jun  8 16:34:06 CDT 2017
 ----------------------------
 https://github.com/asciidoctor/asciidoctor-epub3#structuring-your-manuscript
 
+Wed Jun 14 07:03:16 CDT 2017
+----------------------------
+Sharing the html is insufficient.  The images/ directory needs to go with, and be placed next to the html, 
+as it makes references to those images.

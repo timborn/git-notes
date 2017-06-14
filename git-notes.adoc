@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.1, June 13, 2017: DRAFT
+v0.1, June 14, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -311,7 +311,9 @@ Summary of actions:
 - You are now on branch 'feature/MyNewFeature'
 ```
 
-TODO: does _git flow feature publish_ really not require the feature branch name?
+NB if/when you create a _pull request_ on the BitBucket web interface, you need to specify your feature/ branch.
+For that to work, you will have needed to expose your feature/ branch to the server, and _git flow feature publish_ is a way to make that happen.
+
 
 === Scenario: Collaborating With Someone On A Feature Branch
 TODO: how does 2nd person see and get a copy of a feature branch on central repo?
@@ -484,6 +486,7 @@ The server repo is {url-cookbook}.
 . Create Pull Request
 .. Probably Done Most Easily From BitBucket {url-bitbucket}
 .. You Will Need To Specify At Least Two People To Review+Approve Your Changes
+.. Having Trouble Finding Your Branch?  Did You _publish_ It To The Server?
 . When You Have At Least Two Approvers, Merge Your Changes
 . Finish Your Feature Branch
 .. git flow feature finish
@@ -507,11 +510,26 @@ $ git flow release start RC26-1      # think 'Release Candidate'
 === Scenario: Stabilize The Release
 If your release/ branch isn't quite up to snuff, you create a bugfix/ branch, analogous to a feature/ branch, for the changes.
 
+----
+$ git flow bugfix start yabf
+$ ### ... edit ... add ... commit ...
+$ git flow bugfix publish     ### make it visible on the server
+$ ### create pull request; remember, release/ is protected, per policy
+$ ### assume approvers + merge
+$ git flow bugfix finish      ### kills off this branch
+----
+
 === Scenario: Finish The Release
 The release/ branch is deemed ready, so release/ is merged with master/ and deployed.
 This defines the new version of what is in production.
 release/ must also be merged with develop/, so all the stability changes are not lost.
 Then the release/ branch is destroyed.
+
+----
+$ git flow release publish
+$ ### create pull request on the server; approvers; merge
+$ git flow release finish    
+----
 
 == Exercise #2 - Be A Release Engineer
 You now know enough to manage a release/ branch through to production.
