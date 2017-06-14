@@ -79,7 +79,7 @@ The best thing you can do to really understand git is to walk through each of th
 Once you do that you will have a much better chance of using git and not doing too much damage.
 
 The other insight, especially if you come from other version control systems, is git is versioning a snapshot of the whole project, not a specific file.  
-There is no send of locking files, checking them out & in, or tagging a file with a version number.
+There is no notion of locking files, checking them out & in, or tagging a file with a version number.
 A version in git captures an entire filesystem -- all the files and directories -- at some point in time.
 
 [IMPORTANT]
@@ -100,7 +100,16 @@ image::images/TheMentalModelofGit.png[The Zen of Git]
 == The Zen of Git Flow
 
 === Standard Branching Model in GitFlow
+This image comes from Vincent Driessen's paper, "A Successfull Git Branching Model".
+Note the interaction among the various branches.
+If you study this a bit, you will see a pattern appear: every _protected_ branch has one or more _creative_ branches feedihg into it.
+That pattern appears at least three times in this diagram.
+Can you find them?
 
+image::images/git-model@2x.png[The Standard GiFlow Model]
+
+Throughout the document I use the notation of _feature/_ for a feature branch, _release/_ for a release branch, etc.  
+The reason is in gitfow, those are the prefixes that are commonly used.
 
 == Getting Started
 Gitflow is a set of policies and conventions implemented on top of git.
@@ -131,7 +140,7 @@ Checking connectivity... done.
 
 == Scenario: Initializing A Repository For Git Flow
 scenario: initialize git repositry +
-roles: architect +
+roles: developer +
 goal: create git repo with suitable GitFlow branches and policies
 
 Initializing your local repo so it knows you intend to use gitflow policies is essential, otherwise gitflow refuses to work:
@@ -221,8 +230,6 @@ image::images/CreatingAPullRequest2.png[Creating a Pull Request]
 This is where you select which branch you are proposing for the merge request.
 In our case it will always be feature/<something> being merged into _develop_ branch.
 
-TODO add URL for BitBucket {url-bitbucket}
-
 Once the change is approved by two other people, Dave can merge his changes into _develop_, like this:
 
 image::images/PullRequestMerge.png[Pull Request Merge]
@@ -233,12 +240,33 @@ IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ bran
 
 === Scenario: Updating Your Copy of Your Repository
 
-=== Scenario: Commiting Your Changes
+It's a fact of life that someone will always work later than you and get up earlier than you, so when you start every morning, you would be well advised to _pull_ at least daily, if not more often.
+In git, _pull_ is a combination of _fetch_ (from the central server) and _merge_.
+This is where you refresh your local repository with all the changes that have been going on around you.
 
-=== Scenario: Pushing Your Changes to the Central Repository (BitBucket)
-Always pull before you push.
-This is where merge conflicts may happen.
-How to resolve merge conflicts?
+----
+$ git pull
+----
+
+=== Scenario: Sharing Your Changes
+
+While you are working on your feature, you are (hopefully) collaborating.
+Since you cannot merge your changes from feature/ branch to develop/ branch until it's at least stable, how do you share?
+
+Gitflow has the notion of _publish_ which makes your feature/ _branch_ visible on the server.
+Your changes are still on a feature/ branch, and others can _pull_ and see those changes and collaborate with you, but your changes are not merged into develop/ until you are ready.
+
+----
+$ git flow feature publish MyNewFeature
+----
+
+If you are trying to collaborate with someone, you need to see a copy, so use some combination of:
+
+----
+$ git flow feature pull MyNewFeature
+$ git flow feature track MyNewFeature
+$ git flow feature checkout MyNewFeature
+----
 
 == Feature Branches
 If you are a developer working within the _GitFlow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
