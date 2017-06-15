@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.1, June 14, 2017: DRAFT
+v0.2, June 14, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -15,7 +15,7 @@ v0.1, June 14, 2017: DRAFT
 
 == Introduction
 Git is a version control system.
-Basically it is where we store documents, code, configuration settings, all kinds of things that we want to keep track of and _version_ as changes are made over time.
+Basically, it is where we store documents, code, configuration settings, all kinds of things that we want to keep track of and _version_ as changes are made over time.
 
 Git provides _many_ choices.  
 This is an attempt to reduce git and GitFlow to a small enough, usable subset.
@@ -46,9 +46,11 @@ Thanks to Kevin Lynch for much of the art work, helping to clarify the effects o
 Some of the art work was borrowed from the seminal GitFlow paper, http://nvie.com/posts/a-successful-git-branching-model/["A Successful Git Branching Model"] by Vincent Driessen.  
 Vincent formalized a set of common patterns for groups working together using git, and it has become well established.
 
+Thanks to Maria Muffoletto for her diligent editing.
+
 === Use Cases
 One way to view this whole thing is through the lens of the different people (actors) and what they want to accomplish (goals).
-For this I use a Use Case Diagram, like this:
+For this, I use a Use Case Diagram, like this:
 
 image::images/gitflow-use-cases.png[git/GitFlow Use Cases]
 
@@ -61,11 +63,13 @@ IMPORTANT: You may well have to operate in different roles at different times.
 == The Zen of Git
 https://www.pluralsight.com/authors/paolo-perrotta[Paulo Perrotta on Pluralsight] did an outstanding job of explaining what really happens in git.  
 I found that key to being able to manage git.  
-The key point is the distinct areas: working directory, staging area and your (local) repository.  
+The key point is the distinct areas: working directory, staging area, and your (local) repository.  
 The advanced class adds a stash area.  
-Every git command operates on these areas; once you understand how they work together things become _much_ more clear.
+Every git command operates on these three areas; once you understand how they work together things become _much_ more clear.
 
 A git version identifier identifies a unique state of the file system and all files within it.  It does not version files, but the entire repository.
+
+// MARIA: This feels like too big of a jump from a high-level explanation of three areas of work and then getting into a git version identifier. I'd expect there will be three sections following this announcement of the three work spaces and that you'd explain them a little bit. Since further down you start to explain the three areas, it may be helpful to tell me here why you're mentioning this at all a git version identifier.
 
 In git, _commit_ puts a copy into your local repository, but since it's local and hasn't left your machine, you are not yet sharing.  You need to understand and use _git push_ in order to collaborate effectively.
 
@@ -78,7 +82,7 @@ Commits are _necessary_ but not sufficient.  You need to _push_ your changes to 
 The best thing you can do to really understand git is to walk through each of the common git commands and understand how it manipulates the working directory, the staging area, the local repo and the remote repo.
 Once you do that you will have a much better chance of using git and not doing too much damage.
 
-The other insight, especially if you come from other version control systems, is git is versioning a snapshot of the whole project, not a specific file.  
+The other insight, especially if you come from other version control systems, is git is versioning a snapshot of the whole project, _not a specific file_.  
 There is no notion of locking files, checking them out & in, or tagging a file with a version number.
 A version in git captures an entire filesystem -- all the files and directories -- at some point in time.
 
@@ -102,28 +106,28 @@ image::images/TheMentalModelofGit.png[The Zen of Git]
 === Standard Branching Model in GitFlow
 This image comes from Vincent Driessen's paper, "A Successfull Git Branching Model".
 Note the interaction among the various branches.
-If you study this a bit, you will see a pattern appear: every _protected_ branch has one or more _creative_ branches feedihg into it.
+If you study this a bit, you will see a pattern appear: every _protected_ branch has one or more _creative_ branches feeding into it.
 That pattern appears at least three times in this diagram.
 Can you find them?
 
-image::images/git-model@2x.png[The Standard GiFlow Model]
+image::images/git-model@2x.png[The Standard GitFlow Model]
 
 Throughout the document I use the notation of _feature/_ for a feature branch, _release/_ for a release branch, etc.  
-The reason is in gitfow, those are the prefixes that are commonly used.
+The reason is in GitFlow, those are the prefixes that are commonly used.
 
 == Getting Started
-Gitflow is a set of policies and conventions implemented on top of git.
-While it is possible to use gitflow policies just using straight gitflow, most people find that awkward.
+GitFlow is a set of policies and conventions implemented on top of git.
+While it is possible to use GitFlow policies just using straight GitFlow, most people find that awkward.
 There are a number of scripts and extensions that can help:
 
-. gitflow scripts (v0.4.1)
-. gitflow for Visual Studio 2013 (v 1.1.0.0)
-. gitflow for Visual Studio 2015 (v 1.1.0.0)
+. GitFlow scripts (v0.4.1)
+. GitFlow for Visual Studio 2013 (v 1.1.0.0)
+. GitFlow for Visual Studio 2015 (v 1.1.0.0)
 
-Each of these is found in the gitflow repository in the NONPROD project on BitBucket.
+Each of these is found in the GitFlow repository in the NONPROD project on BitBucket.
 
 == Scenario: Clone Git Repository
-Cloning a git repo is the same for git & gitflow.  
+Cloning a git repo is the same for git & GitFlow.  
 Nothing special here.
 
 ----
@@ -138,20 +142,20 @@ Resolving deltas: 100% (122/122), done.
 Checking connectivity... done.
 ----
 
-== Scenario: Initializing A Repository For Git Flow
+== Scenario: Initializing A Repository For GitFlow
 scenario: initialize git repositry +
 roles: developer +
 goal: create git repo with suitable GitFlow branches and policies
 
-Initializing your local repo so it knows you intend to use gitflow policies is essential, otherwise gitflow refuses to work:
+Initializing your local repo so it knows you intend to use GitFlow policies is essential, otherwise GitFlow refuses to work:
 
 ----
 $ git flow feature
-fatal: Not a gitflow-enabled repo yet. Please run "git flow init" first.
+fatal: Not a GitFlow-enabled repo yet. Please run "git flow init" first.
 ----
 
 When you clone a repository you get a local copy of the whole repo on your machine.
-To use the GitFlow pattern, you will need to initialize it (once), and shown below.
+To use the GitFlow pattern, you will need to initialize it (once), as shown below.
 
 ----
 $ git flow init
@@ -175,13 +179,15 @@ Take all the defaults for various branch names.
 
 [ TIP ]
 _"Remember that code is really the language in which we ultimately express the requirements."_ +
-- Uncle Bob Martin.
+- Uncle Bob Martin
 
 TODO: include better pix emphasizing bouncing between develop and feature branches
 
 Dave the Developer has a daily cycle for creating new features.  
 We assume you already know how Dave got his git set up.
 If not, see section XXXXXXXXXXXX
+
+// MARIA: Don't forget to update the XXXXX above with whatever section it should be :) 
 
 The daily cycle looks something like this:
 
@@ -218,7 +224,7 @@ The code is always changing, and by __pull__ing, you are fetching all those chan
 The cycle of edit / commit / pull / push continues until ...
 
 When the feature is complete, it's time to merge the changes into the _develop_ branch.
-This promotion, from _feature_ to _develop_, requires an inspection of two other people.
+This promotion, from _feature_ to _develop_, requires an inspection by two other people.
 For production code, we use _pull requests_ to trigger these code inspections.  
 A _pull request_ ends up looking like an email pointing to the specific changes being made.  
 This is best done using the web interface, as shown below:
@@ -228,13 +234,13 @@ On the left edge, select "Create pull request".
 
 image::images/CreatingAPullRequest2.png[Creating a Pull Request]
 This is where you select which branch you are proposing for the merge request.
-In our case it will always be feature/<something> being merged into _develop_ branch.
+In our case, it will always be feature/<something> being merged into _develop_ branch.
 
 Once the change is approved by two other people, Dave can merge his changes into _develop_, like this:
 
 image::images/PullRequestMerge.png[Pull Request Merge]
 
-NOTE: Code inspection by two other people is a project policy for all production code.  Other repos may relex this to a single inspector (or less), depending on the criticality of the code.
+NOTE: Code inspection by two other people is a project policy for all production code.  Other repos may relax this to a single inspector (or less), depending on the criticality of the code.
 
 IMPORTANT: The longer you are on a _feature_ branch, the more the _develop_ branch will drift away and your colleagues will have less exposure to your work.  Therefore you want to push your work from the _feature_ branch to _develop_ frequently.
 
@@ -268,6 +274,8 @@ $ git flow feature track MyNewFeature
 $ git flow feature checkout MyNewFeature
 ----
 
+// MARIA: I would clarify what these mean since you said I can use "some combination of" them. 
+
 == Feature Branches
 If you are a developer working within the _GitFlow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
 We walk through all those scenarios in this section.
@@ -294,13 +302,13 @@ $ git branch --list
 * feature/MyNewFeature
   master
 ```
-This tells you your edits & commits are on your feature branch.  
+This tells you your edits and commits are on your feature branch.  
 Start coding!
 
 === Scenario: Publishing Your Work So Others Can See
 It is important to collaborate, so we share our code, even our feature branches, using the central repository.
 Your code is not (yet) merged on to develop/ so it doesn't need a _pull request_ and approvers, but you do need to get a copy of your feature branch on the central server so others can collaborate.
-In GitFlow this is _publish_.
+In GitFlow, this is _publish_.
 ```
 $ git flow feature publish 
 
@@ -323,7 +331,7 @@ You can see all branches, both locally and on the central repository:
 $ git branch --list -a
 ```
 
-Per _git flow cheatsheet_ (https://danielkummer.github.io/git-flow-cheatsheet):
+Per _GitFlow cheatsheet_ (https://danielkummer.github.io/git-flow-cheatsheet):
 ```
 $ git flow feature pull origin MyNewFeature
 
@@ -336,8 +344,10 @@ $ git flow feature track MyNewFeature
 $ git flow feature finish MyNewFeature
 ```
 
-TODO: this merges? your feature branch into develop/ and deletes the feature branch.  
+This merges your feature/ branch into develop/ and deletes the feature/ branch.  
 You end up on develop/ in your working directory.
+
+While you can use the 'merge' button on the BitBucket website, this is slightly preferable.  See section XXX for details.
 
 === Scenario: What If We Have A GitFlow Policy Of Two Approvers?
 As a way to ensure changes get multiple sets of eyes, it's possible to 'protect' a branch by requiring that the merge occur via _pull requests_.  
@@ -457,16 +467,24 @@ Hint:
 == Pull Requests
 Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
 
-A _pull request_ looks like this XXXXXXX
+A _pull request_ looks like an email.  
+It is generated using the BitBucket website ({url-bitbucket}).
+The email includes a link so people can review the changes made, add comments and (hopefully) approve your changes.
 
-You create a pull request HOW????
+// MARIA: Don't forget to add a screenshot. 
 
-If you are asked to approve a pull request, review the submitted code changes carefully, add any comments and decide if you want to approve or reject.
+image::images/CreatingAPullRequest.png[Creating A Pull Request]
 
-When you _pull request_ has been approved (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
+// MARIA: I think you covered this above, but feel free to elaborate again - probably wouldn't hurt.
+
+If you are asked to approve a pull request, review the submitted code changes carefully, add any comments, and decide if you want to approve or reject.
+
+When your _pull request_ has been approved, (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
+
+// MARIA: By clicking the merge button! A+ for Maria
 
 == Exercise #1 - Be A Developer
-_"Be the ball"_ - Ty Webb (Chevy Chase), Caddyshack
+_"Be the ball."_ - Ty Webb (Chevy Chase), Caddyshack
 
 At this point you know enough to be able to demonstrate what a developer's life looks like, bouncing between feature/ and develop/ branches.
 
@@ -490,6 +508,11 @@ The server repo is {url-cookbook}.
 . When You Have At Least Two Approvers, Merge Your Changes
 . Finish Your Feature Branch
 .. git flow feature finish
+
+// MARIA: I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
+
+// MARIA: Overall thoughts: this is easy enough to do, but I feel like it would be easier if you provided them with the recipe. It seems like a waste of time to have people make up a reeipe on the spot.
+
 
 == Release Branches
 While a developer focuses on the creation of feature/ branches, then merging them into develop/, the other branches are used for different roles.
@@ -540,10 +563,12 @@ You now know enough to manage a release/ branch through to production.
 . Create A bugfix/ Branch Off The Release Branch
 . Add Some 'Stabilizing Fix', Commit The Change
 . Use A Pull Request To Merge bugfix/ Into release/
-.. Remember: In Production, master/ release/ and develop/ Are All Protected By 'Two Approver' Policy
+.. Remember: In Production, master/, release/, and develop/ Are All Protected By 'Two Approver' Policy
 . Finish Your Release Branch
 .. Once Again, Be Aware That You Will Need A Pull Request To Merge To master/
 .. Observe That Your Changes Are In Both master/ and develop/
+
+// MARIA: Same as above: I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
 
 == Hot Fixes
 actors: fixers
@@ -552,9 +577,9 @@ events: create, finish, push
 
 If you have done the preceding exercises, you already know everything there is to know.
 hotfix/ is created off master/ when it is needed to a fix to production (master/).
-master/ is "protected" by gitflow polcies of "two approvers", so you need to create a branch off master/ and use _git pull_ to merge it back into master/.
+master/ is "protected" by gitflow polcies of "two approvers," so you need to create a branch off master/ and use _git pull_ to merge it back into master/.
 
-Q.E.D.
+Q.E.D. - define? I KNOW I should know this one and I'm mad I can't remember. 
 
 == Merge Conflicts
 What are they?  How to resolve them?
@@ -562,7 +587,7 @@ What are they?  How to resolve them?
 == BitBucket
 BitBucket ({url-bitbucket}) is a commercial (Atlassian) version of a git server.
 Our copy is set up so all of us can create our own repositories, so you can experiment to your heart's content.
-In this section I would like to quickly show how to set up a sample repo with the gitflow policies similar to that used for production code.
+In this section, I would like to quickly show how to set up a sample repo with the GitFlow policies similar to that used for production code.
 
 === Create Your Own Repository
 Start on the BitBucket website, and observe that you (yes, you!) have your own space for creating git repositories. 
@@ -581,6 +606,8 @@ image::images/bitbucket-3.jpg[BitBucket 1]
 
 === Create develop/ Branch
 You need to manually create the initial develop/ branch.  All the others "just work".
+
+// MARIA: When you say the others "just work", what does that mean? I'll still have to create them somehow I presume? But I won't have to do any special configuration because it will leverage the config settings of the develop/ branch? I see there is a "create branch" button after the develop branch exists.
 
 image::images/bitbucket-4.jpg[BitBucket 1]
 
@@ -629,7 +656,7 @@ After doing this, you may fix the identity used for this commit with:
 ....
 
 === The Hallquist Invariant 
-When you use gitflow as described, after you merge a release/ branch to master/, what you had on the tip of release/ should _exactly_ match when becomes the new master/.
+When you use GitFlow as described, after you merge a release/ branch to master/, what you had on the tip of release/ should _exactly_ match when becomes the new master/.
 
 This isn't because the 'merge' on master/ is overwriting everything. 
 It's because all the changes in that release/ include everything on master/ already.
