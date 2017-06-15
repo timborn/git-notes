@@ -67,7 +67,7 @@ Every git command operates on these three areas; once you understand how they wo
 
 A git version identifier identifies a unique state of the file system and all files within it.  It does not version files, but the entire repository.
 
-// This feels like too big of a jump from a high-level explanation of three areas of work and then getting into a git version identifier. I'd expect there will be three sections following this announcement of the three work spaces and that you'd explain them a little bit. Since further down you start to explain the three areas, it may be helpful to tell me here why you're mentioning this at all a git version identifier.
+// MARIA: This feels like too big of a jump from a high-level explanation of three areas of work and then getting into a git version identifier. I'd expect there will be three sections following this announcement of the three work spaces and that you'd explain them a little bit. Since further down you start to explain the three areas, it may be helpful to tell me here why you're mentioning this at all a git version identifier.
 
 In git, _commit_ puts a copy into your local repository, but since it's local and hasn't left your machine, you are not yet sharing.  You need to understand and use _git push_ in order to collaborate effectively.
 
@@ -185,7 +185,7 @@ Dave the Developer has a daily cycle for creating new features.
 We assume you already know how Dave got his git set up.
 If not, see section XXXXXXXXXXXX
 
-// Don't forget to update the XXXXX above with whatever section it should be :) 
+// MARIA: Don't forget to update the XXXXX above with whatever section it should be :) 
 
 The daily cycle looks something like this:
 
@@ -272,7 +272,7 @@ $ git flow feature track MyNewFeature
 $ git flow feature checkout MyNewFeature
 ----
 
-// I would clarify what these mean since you said I can use "some combination of" them. 
+// MARIA: I would clarify what these mean since you said I can use "some combination of" them. 
 
 == Feature Branches
 If you are a developer working within the _GitFlow_ pattern, most of your interaction involves creating a feature branch, editing your code, publishing changes to your branch and eventually creating a pull request and finishing the feature branch.  
@@ -342,10 +342,10 @@ $ git flow feature track MyNewFeature
 $ git flow feature finish MyNewFeature
 ```
 
-TODO: this merges? your feature branch into develop/ and deletes the feature branch.  
+This merges your feature/ branch into develop/ and deletes the feature/ branch.  
 You end up on develop/ in your working directory.
 
-// Does this merge? I'm confused now.
+While you can use the 'merge' button on the BitBucket website, this is slightly preferable.  See section XXX for details.
 
 === Scenario: What If We Have A GitFlow Policy Of Two Approvers?
 As a way to ensure changes get multiple sets of eyes, it's possible to 'protect' a branch by requiring that the merge occur via _pull requests_.  
@@ -465,19 +465,21 @@ Hint:
 == Pull Requests
 Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
 
-A _pull request_ looks like this XXXXXXX
+A _pull request_ looks like an email.  
+It is generated using the BitBucket website ({url-bitbucket}).
+The email includes a link so people can review the changes made, add comments and (hopefully) approve your changes.
 
-// Don't forget to add a screenshot. 
+// MARIA: Don't forget to add a screenshot. 
 
-You create a pull request HOW????
+image::images/CreatingAPullRequest.png[Creating A Pull Request]
 
-// I think you covered this above, but feel free to elaborate again - probably wouldn't hurt.
+// MARIA: I think you covered this above, but feel free to elaborate again - probably wouldn't hurt.
 
 If you are asked to approve a pull request, review the submitted code changes carefully, add any comments, and decide if you want to approve or reject.
 
 When your _pull request_ has been approved, (policy: by at least two reviewers) you can proceed to merge your changes.  HOW???
 
-// By clicking the merge button! A+ for Maria
+// MARIA: By clicking the merge button! A+ for Maria
 
 == Exercise #1 - Be A Developer
 _"Be the ball."_ - Ty Webb (Chevy Chase), Caddyshack
@@ -505,9 +507,9 @@ The server repo is {url-cookbook}.
 . Finish Your Feature Branch
 .. git flow feature finish
 
-// I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
+// MARIA: I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
 
-// Overall thoughts: this is easy enough to do, but I feel like it would be easier if you provided them with the recipe. It seems like a waste of time to have people make up a reeipe on the spot.
+// MARIA: Overall thoughts: this is easy enough to do, but I feel like it would be easier if you provided them with the recipe. It seems like a waste of time to have people make up a reeipe on the spot.
 
 
 == Release Branches
@@ -564,7 +566,7 @@ You now know enough to manage a release/ branch through to production.
 .. Once Again, Be Aware That You Will Need A Pull Request To Merge To master/
 .. Observe That Your Changes Are In Both master/ and develop/
 
-// Same as above: I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
+// MARIA: Same as above: I'm not sure why every word is capitalized here. It just makes it read awkwardly. 
 
 == Hot Fixes
 actors: fixers
@@ -603,7 +605,7 @@ image::images/bitbucket-3.jpg[BitBucket 1]
 === Create develop/ Branch
 You need to manually create the initial develop/ branch.  All the others "just work".
 
-// When you say the others "just work", what does that mean? I'll still have to create them somehow I presume? But I won't have to do any special configuration because it will leverage the config settings of the develop/ branch? I see there is a "create branch" button after the develop branch exists.
+// MARIA: When you say the others "just work", what does that mean? I'll still have to create them somehow I presume? But I won't have to do any special configuration because it will leverage the config settings of the develop/ branch? I see there is a "create branch" button after the develop branch exists.
 
 image::images/bitbucket-4.jpg[BitBucket 1]
 
