@@ -484,7 +484,7 @@ The server repo is {url-cookbook}.
 .. Be Sure To Add A Link To Your Recipe In The Main Cookbook.html
 . ... the usual git add / commit / pull ...
 . Create Pull Request
-.. Probably Done Most Easily From BitBucket {url-bitbucket}
+.. Probably Done Most Easily From BitBucket {url-cookbook}
 .. You Will Need To Specify At Least Two People To Review+Approve Your Changes
 .. Having Trouble Finding Your Branch?  Did You _publish_ It To The Server?
 . When You Have At Least Two Approvers, Merge Your Changes
@@ -635,3 +635,28 @@ This isn't because the 'merge' on master/ is overwriting everything.
 It's because all the changes in that release/ include everything on master/ already.
 
 This is why Ray believes we can test release/ and ship those binaries without violating that other important invariant: _master/ represents what is in production_.
+
+=== Merging On BitBucket Versus Merging From Your Machine
+If you use a pull request, get your approvers and try to use the _merge_ button on the BitBucket web interface, it _will_ merge, but you may then run into a strange error:
+
+----
+$ git flow feature finish bluebarb-pie
+Branches 'develop' and 'origin/develop' have diverged.
+Fatal: And branch 'develop' may be fast-forwarded.
+
+$ git branch
+  develop
+* feature/bluebarb-pie
+  master
+----
+
+That first error is meaningful.  
+The develop/ branch on your local machine differs from what's on the server (you just merged on the server using the BitBucket web interface).
+
+One way around this is to refresh your local repo, but _git pull_ won't work as expected since you are still on a feature/ branch, so ...
+
+----
+$ git checkout develop
+$ git pull
+$ git flow feature finish bluebarb-pie
+----
