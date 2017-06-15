@@ -46,6 +46,8 @@ Thanks to Kevin Lynch for much of the art work, helping to clarify the effects o
 Some of the art work was borrowed from the seminal GitFlow paper, http://nvie.com/posts/a-successful-git-branching-model/["A Successful Git Branching Model"] by Vincent Driessen.  
 Vincent formalized a set of common patterns for groups working together using git, and it has become well established.
 
+Thanks to Maria Muffoletto for her diligent editing.
+
 === Use Cases
 One way to view this whole thing is through the lens of the different people (actors) and what they want to accomplish (goals).
 For this, I use a Use Case Diagram, like this:
