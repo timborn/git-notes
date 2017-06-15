@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.2, June 14, 2017: DRAFT
+v0.2, June 15, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -573,13 +573,15 @@ You now know enough to manage a release/ branch through to production.
 == Hot Fixes
 actors: fixers
 
-events: create, finish, push
+events: create, publish, finish
 
 If you have done the preceding exercises, you already know everything there is to know.
 hotfix/ is created off master/ when it is needed to a fix to production (master/).
-master/ is "protected" by gitflow polcies of "two approvers," so you need to create a branch off master/ and use _git pull_ to merge it back into master/.
+master/ is "protected" by gitflow policies of "two approvers," so you need to create a branch off master/ and use _git pull_ to merge it back into master/.
 
-Q.E.D. - define? I KNOW I should know this one and I'm mad I can't remember. 
+image::images/HotfixBranching.png[Hotfix Branch]
+
+IMPORTANT: when a hotfix/ is finished, not only is it merged to master/ but also to develop/
 
 == Merge Conflicts
 What are they?  How to resolve them?
