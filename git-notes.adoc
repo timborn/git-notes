@@ -6,7 +6,7 @@ v0.2, June 15, 2017: DRAFT
 :sectnums:
 :toc: left
 :url-bitbucket: http://tss4w2116:7990/projects
-:url-cookbook: http://tss4w2116:7990/projects/timborn/cookbook
+:url-cookbook: http://tss4w2116:7990/users/i495335/repos/cookbook
 :url-pro-git-book: https://git-scm.com/book/en/v2/
 
 // I like the TOC on the left side.
