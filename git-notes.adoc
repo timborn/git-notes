@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.2, June 15, 2017: DRAFT
+v0.2, June 19, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
