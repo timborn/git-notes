@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.2, June 19, 2017: DRAFT
+v0.2, June 20, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -688,4 +688,21 @@ One way around this is to refresh your local repo, but _git pull_ won't work as 
 $ git checkout develop
 $ git pull
 $ git flow feature finish bluebarb-pie
+----
+
+=== Closing The Gap Before You Merge
+
+The time while you create the pull request and get approvals allows develop/ to change, sometimes introducing merge conflicts.
+These merge conflicts are easier to deal with *before* you start to merge your feature/ into develop/.
+
+----
+$ git flow feature start WizBangFeature
+$ # edit / add / commit 
+$ git flow feature publish   # make it visible on BitBucket
+$ # jump to BitBucket to create pull request
+$ # IN THE MEAN TIME THINGS HAVE CHANGED ON develop/
+$ # so after you get your approvals ...
+$ git checkout develop
+$ git pull  # deal with merge conflicts here, BEFORE you merge
+$ git flow feature finish WizBangFeature
 ----
