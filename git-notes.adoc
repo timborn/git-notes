@@ -1,12 +1,13 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.2, June 20, 2017: DRAFT
+v0.3, June 20, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
 :toc: left
 :url-bitbucket: http://tss4w2116:7990/projects
 :url-cookbook: http://tss4w2116:7990/users/i495335/repos/cookbook
+:url-gitflow-tools: http://tss4w2116:7990/projects/NON/repos/gitflow
 :url-pro-git-book: https://git-scm.com/book/en/v2/
 
 // I like the TOC on the left side.
@@ -496,10 +497,11 @@ The server repo is {url-cookbook}.
 . Clone The Repository
 . Initialize Your Local Repo For GitFlow
 .. This May Require You To Install GitFlow
+.. GitFlow Tools: {url-gitflow-tools}
 . Create A Feature Branch
 . Edit
 .. Add A New Recipe; Place It In It's Own XXX.html File
-.. Be Sure To Add A Link To Your Recipe In The Main Cookbook.html
+.. Be Sure To Add A Link To Your Recipe In The Main cookbook.html
 . ... the usual git add / commit / pull ...
 . Create Pull Request
 .. Probably Done Most Easily From BitBucket {url-cookbook}
