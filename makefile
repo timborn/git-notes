@@ -11,3 +11,10 @@ epub:
 
 mobi:
 	asciidoctor-epub3 -a ebook-format=kf8 git-notes.adoc
+
+edit:
+	@echo to set up for editing:
+	@echo bundle exec guard	\# in one terminal
+	@echo ./watch.rb . git-notes	\# in another terminal
+	@echo safari git-notes.html
+	@echo vi git-notes.adoc
