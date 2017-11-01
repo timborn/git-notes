@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.4, June 20, 2017: DRAFT
+v0.5, September 19, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -353,6 +353,8 @@ The merge is still local to your machine until you push.
 IMPORTANT: If you have _pull request_ policy in place, it becomes very difficult to finish your feature/ branch from the local command line.
 While the merge will work, the subsequent push to sync develop/ on BitBucket will get rejected by the _pull request_ policy.
 
+TODO: add image of BitBuget pull request completed w/ merge button 
+
 There is a 'merge' button on BitBucket web interface where your _pull request_ is.
 This will complete the merge, and the result will land in BitBucket.
 You will still need to delete your branches and sync your local repo, however.
@@ -486,6 +488,19 @@ Hint:
 == Pull Requests
 Code that is intended to be merged with master (production), develop (the current version of all work), or release (a release candidate branch between develop and master) will require a _pull request_.
 
+=== Creating A Pull Request
+
+TODO: finish me
+
+=== Reviewing A Pull Request 
+The web interface for pull requests is pretty good, but sometimes you want to pull in the changed code and play with it.  The steps below show how to get a copy.
+----
+$ git checkout develop	# get back on develop/ branch
+$ git pull		# get latest
+$ git checkout -t origin/feature/foobar		# -t to Track this branch
+$ # any subsequent checkouts of this branch would not need -t
+----
+
 A _pull request_ looks like an email.  
 It is generated using the BitBucket website ({url-bitbucket}).
 The email includes a link so people can review the changes made, add comments and (hopefully) approve your changes.
@@ -576,6 +591,26 @@ $ git flow release publish
 $ ### create pull request on the server; approvers; merge
 $ git flow release finish    
 ----
+
+=== Scenario: A Manifest For The Release
+
+TODO: when we deploy a release we may need a manifest of all changes
+This will be all commits on develop since last release,
+plus all commits (bugfix) on this release branch,
+plus (possibly) any hotfixes that happened _after_ we branched for this release
+This will involve tags and jujitsu with git log command.
+
+git log --since=<date1> --no-merges --branches=release30 --tags=rel30  --pretty=oneline
+
+--pretty=oneline synonym for --oneline
+
+	   git log --name-status release..test
+           Show the commits that are in the "test" branch but not yet in the
+           "release" branch, along with the list of paths each commit
+           modifies.
+
+That syntax might be useful for e.g. show commits in master that are not yet
+in the release branch, for instance.
 
 == Exercise #2 - Be A Release Engineer
 You now know enough to manage a release/ branch through to production.
@@ -729,3 +764,21 @@ $ git checkout develop
 $ git pull  # deal with merge conflicts here, BEFORE you merge
 $ git flow feature finish WizBangFeature
 ----
+
+=== I Messed Up!  Get Me Back To A Known Good State
+
+You may find yourself in a gnarly state.  The following advice will clean up your working directory and put you back to a known good state.
+
+TODO: add strong admonition that this procedure is dangerous and will erase your uncommited file
+
+----
+TODO: insert the two-step dance that will reset my environment
+$ git clean -dfx
+$ git reset --hard
+----
+
+=== Finding Dead Branches
+People will forget to kill off their branches when they are done with them.  
+While you can delete them yourself, it helps to know the age of the branches.
+
+TODO: add recipe for finding old branches (and their age)

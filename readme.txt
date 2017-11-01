@@ -55,3 +55,8 @@ Wed Jun 14 07:03:16 CDT 2017
 ----------------------------
 Sharing the html is insufficient.  The images/ directory needs to go with, and be placed next to the html, 
 as it makes references to those images.
+
+Tue Sep 19 14:06:08 CDT 2017
+----------------------------
+TODO: add basic asciidoc documentation here so I can search for things while
+flying.
