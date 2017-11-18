@@ -1,6 +1,6 @@
 = Git & GitFlow Notes
 Tim Born <Timothy.D.Born@JPMorgan.com>
-v0.5, September 19, 2017: DRAFT
+v0.6, November 17, 2017: DRAFT
 :doctype: book
 :icons: font
 :sectnums:
@@ -692,6 +692,42 @@ image::images/bitbucket-8.jpg[BitBucket 1]
 That should be it.
 You now have your own repo with suitable gitflow polcies applied that you can experiment with to your heart's content.
 
+== Tags
+==== Show Tags
+----
+$ git tag
+----
+
+=== Creating Tags
+Because we enforce a JIRA number with every commit, creating a tag from the command line is problematic for some repos.
+In that case use the BitBucket interface, select the specific commit, then on the right side you will see a place to add a tag.
+
+For repos not enforcing a policy that gets in the way of tagging:
+----
+$ git tag Phase33/Begin
+$ git push origin Phase33/Begin  # you have to explicitly share tags
+----
+
+=== Deleting Tags
+The BitBucket trick of selecting the specific commit also works here.
+
+From the command line, it looks something like this:
+----
+$ git tag -d Phase33/Begin  # but does this affect BitBucket?
+----
+
+=== Checking Out Tags
+----
+$ git checkout Phase33/Begin
+----
+
+Nice, but only good for inspection.
+What if you want to create a branch so you can make changes?
+
+----
+$ git checkout -b myBranch Phase33/Begin
+----
+
 == Other
 
 TODO: get these admonitions to work correctly.
@@ -782,3 +818,9 @@ People will forget to kill off their branches when they are done with them.
 While you can delete them yourself, it helps to know the age of the branches.
 
 TODO: add recipe for finding old branches (and their age)
+
+=== Unique Identifier for Builds
+If you are scripting, you sometimes want the SHA-1 for the HEAD, as a unique identifier for e.g. a buiild.
+----
+$ git rev-parse HEAD
+----
