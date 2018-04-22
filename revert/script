@@ -1,0 +1,26 @@
+# Here is 'git log --oneline'.
+# Collect all the SHA1 back to BUT NOT INCLUDING the point you want to keep.
+
+# fe85c0d (HEAD -> develop, origin/develop) Merge branch 'feature/second' into feature/first
+# d15a072 add G on feature/first
+# 6ad9214 Merge branch 'feature/third' into feature/second
+# 22dcbfd add F on feature/third
+# 1e7b5d4 add E on feature/second
+# dc75975 D on feature/first
+# 85cb501 Merge branch 'feature/second' into feature/first
+# 6b04989 created feature/second off develop, containing great idea C
+# 9588666 started feature/first branch with B
+# af16027 experiment with revert command; added A on develop branch
+# d169010 (origin/master, origin/HEAD, master) add section on handling tags
+
+
+for i in fe85c0d d15a072 6ad9214 22dcbfd 1e7b5d4 dc75975 85cb501 6b04989 9588666 # af16027 d169010 
+do
+	echo ::::: $i
+	git revert -n -m1 $i
+	if [ $? != 0 ] ; then
+		echo ::::: TRY AGAIN $i
+		git revert -n $i
+	fi
+done
+
